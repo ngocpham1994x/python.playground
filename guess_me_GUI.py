@@ -1,4 +1,4 @@
-import tkinter as tk
+from tkinter import *
 from tkinter import ttk
 import random as rd
 
@@ -52,7 +52,8 @@ class MainFrame():
         frame.grid(column=0, row=0, sticky=(N, W, E, S))
 
         # main frame components:
-        self.label1 = ttk.Label(frame, text='First name:')
+        self.label1 = ttk.Label(frame, text='Welcome to "Guess me" game\n')
+        self.btn = ttk.Button(parent, text='Exit')
 
         self.nb = ttk.Notebook(frame)
         self.pn1 = ttk.Frame(self.nb)
@@ -61,18 +62,17 @@ class MainFrame():
         self.nb.add(self.pn1, text='Guess me!')
         self.nb.add(self.pn2, text='Let me guess!')
 
-        self.btn = Button(parent, text='Exit')
+        
 
 
         # layout
         self.label1.pack(fill='both', side='top')
-        self.label2.pack(fill='both', side='top')
-        self.nb.pack(fill ="both", expand = 1,)
+        self.nb.pack(fill ="both", expand = True)
 
-        self.btn.grid(row=1, sticky=tk.E)
+        self.btn.grid(column=1, row=1, sticky=(S,E))
 
 def main():
-    app = tk.Tk()
+    app = Tk()
     MainFrame(app)
     # app.geometry('750x250+400+300') 
     app.state('zoomed') # maximize GUI
