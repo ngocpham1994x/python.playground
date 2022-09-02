@@ -127,7 +127,12 @@ class MainFrame():
         return self._row
 
 
+        # layout
+        self.label1.pack(fill='both', side='top')
+        self.label2.pack(fill='both', side='top')
+        self.nb.pack(fill ="both", expand = 1,)
 
+        self.btn.grid(row=1, sticky=tk.E)
 
 def main():
     app = Tk()
