@@ -5,6 +5,12 @@ import random as rd
 
 PAD = 10
 
+# dummy for scrollbar test
+dummy = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum orci vel varius malesuada. Aliquam pellentesque nunc congue urna interdum, sed aliquam justo suscipit. Nulla pulvinar odio ut vulputate egestas. Vestibulum vitae lectus tincidunt, sodales mauris sit amet, vulputate erat. Nunc dolor lacus, varius eu fringilla ut, eleifend ac erat. Cras dictum, est in placerat iaculis, neque lorem semper dui, ut blandit felis eros at orci. Proin nec ipsum vel nisl rutrum pretium. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In dignissim elit blandit felis blandit dapibus. Suspendisse potenti. Phasellus molestie, nulla non elementum laoreet, sapien ante eleifend lectus, eget cursus purus eros quis tellus. Praesent sed risus rhoncus, imperdiet sapien sit amet, convallis dolor. Suspendisse euismod venenatis felis a fermentum. Pellentesque aliquam finibus nisl eu efficitur. \
+Quisque feugiat elit sed sollicitudin iaculis. Nunc quis mollis arcu. Phasellus tempor dui hendrerit orci facilisis scelerisque. Ut pretium metus dui, eget aliquet nibh eleifend nec. Suspendisse pellentesque, magna ac maximus consectetur, tellus nunc bibendum sapien, eu mattis odio erat a mauris. Morbi mattis enim non ex congue egestas sit amet eget sem. Nullam nulla nibh, hendrerit sit amet iaculis non, hendrerit nec nulla. Proin rhoncus tellus sit amet tellus fringilla blandit. Morbi hendrerit enim et lorem aliquam, ut tincidunt velit vestibulum. Donec iaculis interdum finibus. Integer quis fermentum dolor, sed blandit urna. Vestibulum elementum tristique venenatis. \
+Pellentesque non nisi odio. Donec vel euismod nibh. Etiam pharetra nunc rhoncus arcu tincidunt, sed commodo erat gravida. Sed elementum tempus dui nec lobortis. Pellentesque ac diam est. Curabitur sollicitudin vulputate leo, vel facilisis est egestas a. Quisque ornare erat et dignissim luctus. Aenean et velit sem. Nunc quis pellentesque metus, accumsan imperdiet velit. Phasellus vitae nulla sed tortor auctor pellentesque a a dolor. Nunc imperdiet pellentesque lectus eu feugiat. Cras efficitur, sapien non placerat lacinia, tellus lorem tempor eros, id sollicitudin nulla magna feugiat enim. Maecenas hendrerit justo non congue congue. Mauris aliquet velit at ipsum faucibus imperdiet. Suspendisse quis elementum ipsum, vel laoreet massa. \
+Mauris a nunc a libero semper tristique. Aenean vestibulum metus eu varius dignissim. Cras interdum nec diam at accumsan. In hac habitasse platea dictumst. Vestibulum faucibus, sem eu malesuada tempor, libero ligula dapibus nulla, sed interdum libero ante dapibus sapien. Mauris et gravida magna. Aliquam accumsan justo sed dictum posuere. Aenean mauris felis, tincidunt in erat at, auctor suscipit est. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin eget dolor ac elit sagittis maximus et vel odio. Vivamus rutrum eleifend est in mattis. Mauris ligula tortor, congue eu iaculis non, tincidunt nec felis. Duis viverra turpis sit amet nunc rutrum molestie. \
+Integer luctus, leo nec iaculis mollis, mauris erat cursus nisi, non bibendum libero ipsum at odio. Vestibulum nunc lectus, commodo laoreet auctor quis, congue non erat. Nam ut est sit amet odio molestie sollicitudin vitae sed enim. Vivamus maximus leo et semper tempor. Praesent ultrices eros ut diam bibendum lobortis. Cras sit amet tortor pellentesque, suscipit magna a, molestie odio. Cras feugiat neque non arcu elementum semper. Suspendisse condimentum at magna id mollis. Duis malesuada euismod mauris at volutpat. Curabitur mollis leo ex, sit amet dapibus elit scelerisque non. Aliquam vel egestas du"
 
 class MainFrame():
     def __init__(self, parent):
@@ -25,13 +31,19 @@ class MainFrame():
 
         self.btnExit = Button(frame, text='EXIT', command=parent.quit, padx=PAD)
 
-        # main frame layout
-        frame.grid(row=0, column=0, sticky='nw')
-        frame.columnconfigure(0, weight=1)
+        # main frame layout USING GRID 
+        # frame.grid(row=0, column=0, sticky='nsew')
 
-        self.label.grid(row=self._row, column=0)
-        self.nb.grid(row=self._irow(), column=0, padx=PAD)
-        self.btnExit.grid(row=self._irow(), column=0, sticky='e', pady=PAD, padx=PAD)
+        # self.label.grid(row=self._row, column=0)
+        # self.nb.grid(row=self._irow(), column=0, padx=PAD)
+        # self.btnExit.grid(row=self._irow(), column=0, sticky='e', pady=PAD, padx=PAD)
+
+        # main frame layout USING PACK 
+        frame.pack(padx=PAD, pady=PAD)
+
+        self.label.pack()
+        self.nb.pack()
+        self.btnExit.pack(pady=PAD, anchor='se')
 
 
         # panel 1: user guesses the computer-generated number.
@@ -49,6 +61,7 @@ class MainFrame():
 
         self.pn1_scrollbar = Scrollbar(pn1_frame2)
         self.pn1_text = Text(pn1_frame2, yscrollcommand=self.pn1_scrollbar.set)
+        # self.pn1_text.insert(END, dummy*2)
 
         self.pn1_label3 = Label(pn1_frame2, text='Answer: ')
         self.pn1_answer = Entry(pn1_frame2)
@@ -60,9 +73,9 @@ class MainFrame():
 
 
         # panel 1: layout
-        pn1_frame0.grid(row=0, column=0, sticky='w', pady=PAD)
-        pn1_frame1.grid(row=1, column=0, sticky='w', pady=PAD)
-        pn1_frame2.grid(row=2, column=0, sticky='w', pady=PAD)
+        pn1_frame0.grid(row=0, column=0, sticky='w', pady=PAD, padx=PAD)
+        pn1_frame1.grid(row=1, column=0, sticky='w', pady=PAD, padx=PAD)
+        pn1_frame2.grid(row=2, column=0, sticky='w', pady=PAD, padx=PAD)
 
         self.pn1_label0.grid(row=0, column=0)
         self.pn1_label1.grid(row=0, column=0, sticky='e')
@@ -72,7 +85,7 @@ class MainFrame():
         self.pn1_btnGenerate.grid(row=1, column=2, padx=PAD)
 
         self.pn1_text.pack(side=LEFT, fill=BOTH, expand=1)
-        self.pn1_scrollbar.pack(side=LEFT, fill=Y)
+        self.pn1_scrollbar.pack(side=LEFT, fill=Y, expand=1)
         self.pn1_label3.pack(side=TOP, padx=PAD)
         self.pn1_answer.pack(side=TOP, padx=PAD)
         self.pn1_btnCheck.pack(side=TOP, pady=PAD)
@@ -100,9 +113,9 @@ class MainFrame():
         self.pn2_btnFirstGuess.bind('<ButtonRelease-1>', self.onPn2_FirstFuess)
 
         # panel 2: layout
-        pn2_frame0.grid(row=0, column=0, sticky='w', pady=PAD)
-        pn2_frame1.grid(row=1, column=0, sticky='w', pady=PAD)
-        pn2_frame2.grid(row=2, column=0, sticky='w', pady=PAD)
+        pn2_frame0.grid(row=0, column=0, sticky='w', pady=PAD, padx=PAD)
+        pn2_frame1.grid(row=1, column=0, sticky='w', pady=PAD, padx=PAD)
+        pn2_frame2.grid(row=2, column=0, sticky='w', pady=PAD, padx=PAD)
 
         self.pn2_label0.grid(row=0, column=0)
         self.pn2_label1.grid(row=0, column=0, sticky='e')
@@ -196,6 +209,7 @@ class MainFrame():
 def main():
     app = Tk()
     MainFrame(app)
+    # app.geometry('1000x1000')
     # app.state('zoomed') # maximize GUI
     app.mainloop()
 
