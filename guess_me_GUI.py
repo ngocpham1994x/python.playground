@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
-import random as rd
 from tkinter import messagebox
+import random as rd
 
 PAD = 10
 
