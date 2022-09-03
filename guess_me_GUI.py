@@ -209,8 +209,6 @@ class MainFrame():
 def main():
     app = Tk()
     MainFrame(app)
-    # app.geometry('1000x1000')
-    # app.state('zoomed') # maximize GUI
     app.mainloop()
 
 
