@@ -1,5 +1,4 @@
 import random as rd
-from readline import append_history_file
 import requests
 import string
 
@@ -16,17 +15,25 @@ def choose_word():
 
 def hangman(word):
     alphabet = list(string.ascii_lowercase)
+    reveal = '_' * len(word)
 
-    for letter in word:
-        for char in alphabet:
-            if letter == char:
-                
+    for i in range(len(word)):
+        char = input("Does the word have this char?  ")
+        if char in word:
+            reveal[]
+    print (reveal)
+
+    # for i, letter in enumerate(word):
+    #     for char in alphabet:
+    #         if letter == char:
+    #             reveal[i] = letter
+    #         else 
 
 
 def main():
 
     word = choose_word()
-    hangman()
+    hangman(word)
 
 if __name__ == '__main__':
     main()
