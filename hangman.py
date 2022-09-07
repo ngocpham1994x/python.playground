@@ -1,3 +1,4 @@
+from platform import python_branch
 import random as rd
 import requests
 import string
@@ -13,27 +14,44 @@ def choose_word():
     return word
 
 
-def hangman(word):
-    alphabet = list(string.ascii_lowercase)
-    reveal = '_' * len(word)
+def hangman(word, reveal):
 
-    for i in range(len(word)):
-        char = input("Does the word have this char?  ")
-        if char in word:
-            reveal[]
-    print (reveal)
+    indices = []
+    index = 0
+    char = ''
 
-    # for i, letter in enumerate(word):
-    #     for char in alphabet:
-    #         if letter == char:
-    #             reveal[i] = letter
-    #         else 
+    char = input("Does the word have this char?  ")
+    while index < len(word):
+        index = word.find(char, index)
+        if index == -1:
+            break
+        indices.append(index)
+        index = index + 1
+
+    for value in indices:
+        print (f"Letter {char} in posotion  {value}")
+        reveal[value] = char
+    
+    return reveal
 
 
 def main():
 
     word = choose_word()
-    hangman(word)
+    print (f'\nA word was chosen!\n {word}')
+    reveal = '_' * len(word)
+    for i in range(len(word)):
+        reveal = hangman(word, reveal)
+        print (reveal)
+    
+    if '_' in reveal:
+        print ('You loose..')
+    else:
+        print (f"Wow, you guessed the word   '{reveal}'")
 
 if __name__ == '__main__':
     main()
+
+
+
+
