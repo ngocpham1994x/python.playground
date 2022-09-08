@@ -1,7 +1,6 @@
-from platform import python_branch
 import random as rd
 import requests
-import string
+
 
 word_site = "https://www.mit.edu/~ecprice/wordlist.10000"
 
@@ -30,7 +29,7 @@ def hangman(word, reveal):
 
     for value in indices:
         print (f"Letter {char} in posotion  {value}")
-        reveal[value] = char
+        reveal = reveal[:value] + char + reveal[value+1 : ]
     
     return reveal
 
@@ -40,14 +39,18 @@ def main():
     word = choose_word()
     print (f'\nA word was chosen!\n {word}')
     reveal = '_' * len(word)
+
     for i in range(len(word)):
         reveal = hangman(word, reveal)
         print (reveal)
-    
-    if '_' in reveal:
-        print ('You loose..')
-    else:
-        print (f"Wow, you guessed the word   '{reveal}'")
+        if '_' in reveal:
+            print (f'You have {len(word)-i-1} times to guess.')
+        else:
+            print (f"Wow, you guessed the word   '{reveal}'")
+            break
+
+    print ("Game's done!")
+
 
 if __name__ == '__main__':
     main()
