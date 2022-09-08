@@ -20,17 +20,22 @@ def hangman(word, reveal):
     char = ''
 
     char = input("Does the word have this char?  ")
-    while index < len(word):
-        index = word.find(char, index)
-        if index == -1:
-            break
-        indices.append(index)
-        index = index + 1
+ 
+    if len(char) > 1 or len(char) == 0:
+        print ("Incorrect input: char is too long or no input.")
 
-    for value in indices:
-        print (f"Letter {char} in posotion  {value}")
-        reveal = reveal[:value] + char + reveal[value+1 : ]
-    
+    else:
+        while index < len(word):
+            index = word.find(char, index)
+            if index == -1:
+                break
+            indices.append(index)
+            index = index + 1
+
+        for value in indices:
+            print (f"Letter {char} in posotion  {value}")
+            reveal = reveal[:value] + char + reveal[value+1 : ]
+
     return reveal
 
 
@@ -42,7 +47,8 @@ def main():
 
     for i in range(len(word)):
         reveal = hangman(word, reveal)
-        print (reveal)
+        # print (reveal)
+
         if '_' in reveal:
             print (f'You have {len(word)-i-1} times to guess.')
         else:
