@@ -1,5 +1,6 @@
 import random as rd
 import requests
+import string
 
 
 word_site = "https://www.mit.edu/~ecprice/wordlist.10000"
@@ -9,12 +10,16 @@ def choose_word():
     WORDS = response.content.decode('utf-8').splitlines()
 
     word = rd.choice(WORDS).lower()
+    while '-' in word or ' ' in word:
+        word = rd.choice(WORDS).lower()
 
     return word
 
 
 def hangman(word, reveal):
 
+    alphabet = set(string.ascii_lowercase())
+    guessed_char = set()
     indices = []
     index = 0
     char = ''
@@ -29,6 +34,7 @@ def hangman(word, reveal):
             index = word.find(char, index)
             if index == -1:
                 break
+            guessed_char.add(char)
             indices.append(index)
             index = index + 1
 
