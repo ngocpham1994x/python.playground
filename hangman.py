@@ -16,25 +16,19 @@ def choose_word():
     return word
 
 
-def hangman(word, reveal):
-
-    alphabet = set(string.ascii_lowercase())
-    guessed_char = set()
+def hangman(char, word, reveal):
+    alphabet = set(string.ascii_lowercase)
     indices = []
     index = 0
-    char = ''
 
-    char = input("Does the word have this char?  ")
- 
-    if len(char) > 1 or len(char) == 0:
-        print ("Incorrect input: char is too long or no input.")
+    if char not in alphabet:
+        print ("===UH OH! INCORRECT INPUT..!===")
 
     else:
         while index < len(word):
             index = word.find(char, index)
             if index == -1:
                 break
-            guessed_char.add(char)
             indices.append(index)
             index = index + 1
 
@@ -47,21 +41,46 @@ def hangman(word, reveal):
 
 def main():
 
+    guessed_char = set()
+
+    # pick a word
     word = choose_word()
-    print (f'\nA word was chosen!\n {word}')
+    print (f'\nA word was chosen!')
+    # print (word)
     reveal = '_' * len(word)
+    print (reveal)
 
-    for i in range(len(word)):
-        reveal = hangman(word, reveal)
-        # print (reveal)
+    lives = len(word) + 3
 
+    # start playing
+    for i in range(lives) :
+        # initial info
         if '_' in reveal:
-            print (f'You have {len(word)-i-1} times to guess.')
+            print (f'You have {lives - i} times left to guess.')
         else:
             print (f"Wow, you guessed the word   '{reveal}'")
             break
 
-    print ("Game's done!")
+        # pick a char
+        print (f"\nGuessed list: {guessed_char}")
+        char = input("Does the word have this char?  ")
+
+        # check if the char has been guessed, if yes -> hangman()
+        if char not in guessed_char:
+            reveal = hangman(char, word, reveal)
+            guessed_char.add(char)
+
+        # if no -> loose a live
+
+        print (reveal)
+
+
+    # final check
+    if '_' in reveal:
+        print ("You lost...!")
+        print (f"The word is   '{word}'")
+    else:
+        print ("You won! Yayy")
 
 
 if __name__ == '__main__':
