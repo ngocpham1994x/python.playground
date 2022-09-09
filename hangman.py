@@ -71,6 +71,8 @@ def main():
             guessed_char.add(char)
 
         # if no -> loose a live
+        else:
+            print ("You have already guessed that char.")
 
         print (reveal)
 
